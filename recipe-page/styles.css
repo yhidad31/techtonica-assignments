@@ -1,3 +1,15 @@
+h1 {
+  color: #900C3F;
+  font-family: 'DM Serif Text', serif;
+
+}
+
 p {
-  color: blue;
+  color: #FF5733;
+  font-family: 'DM Serif Text', serif;
+
+}
+body {
+  background-color: #DAF7A6;
+  font-family: 'DM Serif Text', serif;
 }
