@@ -9,7 +9,25 @@ p {
   font-family: 'DM Serif Text', serif;
 
 }
+
+.description {
+  color: #FF5733;
+  width: 600px;
+  font-family: 'DM Serif Text', serif;
+
+}
+
 body {
   background-color: #DAF7A6;
   font-family: 'DM Serif Text', serif;
 }
+
+.top {
+  width: 600px;
+}
+
+.left {
+  width: 600px;
+  float: left;
+}
+
