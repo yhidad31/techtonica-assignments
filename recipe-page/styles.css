@@ -31,3 +31,8 @@ body {
   float: left;
 }
 
+.right {
+  width: 600px;
+  float: right;
+}
+
