@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Lora';
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(47, 23, 15, 0.65))), url("http://thealphagroup.net.au/wp-content/uploads/2015/04/blue-background.jpg");
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(47, 23, 15, 0.65))), url("../img/bg.jpg");
   background: linear-gradient(rgba(47, 23, 15, 0.65)), url("http://thealphagroup.net.au/wp-content/uploads/2015/04/blue-background.jpg");
   background-attachment: fixed;
   background-position: center;
@@ -203,7 +203,7 @@ p {
 }
 
 .list-hours .list-hours-item {
-  border-bottom: 1px solid rgba(230, 167, 86, 0.5);
+  border-bottom: 1px solid rgba(28, 95, 150, 0.5);
   padding-bottom: .25rem;
   margin-bottom: 1rem;
   font-style: italic;
@@ -230,7 +230,7 @@ p {
 }
 
 .text-primary {
-  color: #e6a756 !important;
+  color: #052138 !important;
 }
 
 .bg-primary {
@@ -244,12 +244,12 @@ p {
 
 .btn-primary {
   background-color: #e6a756;
-  border-color: #e6a756;
+  border-color: #052138;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background-color: #df902a;
-  border-color: #df902a;
+  border-color: #052138;
 }
 
 .font-weight-light {

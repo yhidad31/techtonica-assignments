@@ -17,10 +17,31 @@ p {
 
 }
 
-body {
-  background-color: #DAF7A6;
-  font-family: 'DM Serif Text', serif;
+@media (max-width: 1080px) {
+  body {
+    background-color:@media (min-width: 1081px) {
+      body {
+        background-color: #900C3F  ;
+        font-family: 'DM Serif Text', serif;
+      }
+    };
+    font-family: 'DM Serif Text', serif;
+  }
 }
+
+@media (min-width: 1081px) {
+  body {
+    background-color: #DAF7A6;
+    font-family: 'DM Serif Text', serif;
+  }
+}
+@media (min-width: 1200px) {
+  body {
+    background-color:#FFC300;
+    font-family: 'DM Serif Text', serif;
+  }
+}
+
 
 .top {
   width: 600px;
@@ -36,3 +57,9 @@ body {
   float: right;
 }
 
+@media (max-width: 1080px) {
+
+  img {
+  width: 100%
+  }
+}
