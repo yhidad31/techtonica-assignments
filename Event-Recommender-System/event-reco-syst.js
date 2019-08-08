@@ -1,7 +1,6 @@
 class EventRecommender() {
   constructor() {
   // All main properties should go here.
-  
   this.events = [];
   this.users = [];
   
@@ -29,4 +28,20 @@ class EventRecommender() {
 
   filter(){
   }
+}
+class Events(){
+  constructor(eventName, eventTYpe){
+    this.eventName = eventName;
+    this.eventType = eventType;
+    this.eventDate = eventDate;
+    this.eventPrice = eventPrice;
+  }
+}
+class Users (){
+  constructor(userName,userInterests){
+    this.userName = userName;
+    this.userInterests = userInterests;
+    this.userSavedEvents = userSavedEvents;
+  }
+
 }
