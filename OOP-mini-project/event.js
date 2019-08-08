@@ -62,13 +62,12 @@ event_obj2.addAvailableTickets("Balcony", 100);
 $(document).ready(function() {
   let html = "";
   $.each(event_array, function(index, item) {
-    html+= `<li>${item.name} - ${item.description}</li>`;
+    html+= `<li>${item.name} - ${item.description} - ${item.searchTickets(0,100)}</li>`;
   });
   // insert final html into #event...
   $("#event").html(html);
 });
 
-document.write(event_obj3.searchTickets(0, 250));
 
 
 
