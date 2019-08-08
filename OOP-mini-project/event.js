@@ -20,7 +20,7 @@ class Event {
    let counter = 1;
    for (let i =0; i<this.availableTickets.length; i++){
      if (this.availableTickets[i].ticketPrice >= min && this.availableTickets[i].ticketPrice<=max){
-       msg += counter + " " + this.availableTickets[i].ticketType + " ";
+       msg += counter + "."+ " " + this.availableTickets[i].ticketType + " ";
        counter++;
    }
   } 
