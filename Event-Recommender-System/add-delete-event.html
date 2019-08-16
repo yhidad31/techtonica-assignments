@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="text.css">
+
+<title>Add/Delete Events </title>
+</head>
+<body>
+    <h1>Event Recommender Add User & Event</h1>
+    <form>
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="event" placeholder="Date">
+    	<input type="button" id="addBtn" class="myButton" value="Add Name and Event">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name</th>
+                <th>Event</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <tr>
+                <td><input type="checkbox" name="record"></td>
+                <td>Yasmine Mahmoud</td>
+                <td>Pasta Making Class</td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" id = "deleteBtn" class="myButton">Delete Event</button>
+    <script src="./event-reco-syst.js"></script>
+</body> 
+
+<style type="text/css">
+    body {
+    background-color: blueviolet;
+  }
+    form{
+        margin: 20px 0;
+    }
+    form input, button{
+        padding: 5px;
+    }
+    table{
+        width: 100%;
+        margin-bottom: 20px;
+		border-collapse: collapse;
+    }
+    table, th, td{
+        border: 1px solid #44c767;
+    }
+    table th, table td{
+        padding: 10px;
+        text-align: left;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-row").click(function(){
+            var name = $("#name").val();
+            var email = $("#Concert").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + name + "</td><td>" + email + "</td></tr>";
+            $("table tbody").append(markup);
+        });
+        
+        // Find and remove selected table rows
+        $("#deleteBtn").click( e => {
+            $("#table-body").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+
+        $('#addBtn').click( e => {
+          var name = $("#name").val();
+            var event = $("#event").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + name + "</td><td>" + event + "</td></tr>";
+            $('#table-body').append(markup);
+          
+            //add object user 
+            let user = new Users(name,event);
+            system.addUser(user);
+            console.log('system.users after add = ', system.users);
+        });
+        console.log('system.users = ', system.users);
+    });    
+</script>
+
+</html>     

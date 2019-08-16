@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<style>
+table {
+  font-family: arial, sans-serif;
+  color: blueviolet;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  color: blueviolet;
+
+}
+
+td, th {
+  border: 1px solid blueviolet;
+  text-align: left;
+  padding: 8px;
+  color: blueviolet
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
+</style>
+</head>
+<body>
+
+<h2>Find Events you're interested in!</h2>
+<p>Type something in the input field to search the table for event names, event types, dates or prices:</p>  
+<input id="myInput" type="text" placeholder="Search..">
+<br><br>
+
+<table>
+  <thead>
+  <tr>
+    <th>Event Name</th>
+    <th>Event Type</th>
+    <th>Date</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody id="myTable">
+  <tr>
+    <td>Warriors vs. Spurs</td>
+    <td>Sports</td>
+    <td>August 5</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Learn to make buccatini from scratch</td>
+    <td>Cooking</td>
+    <td>August 7</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Harry Potter 1</td>
+    <td>Movie</td>
+    <td>August 7</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>Learn to plant and grow winter squash</td>
+    <td>Gardening</td>
+    <td>August 10</td>
+    <td>20</td>
+  </tr>
+  </tbody>
+</table>
+  
+<p>Have fun!</p>
+
+</body>
+</html>
