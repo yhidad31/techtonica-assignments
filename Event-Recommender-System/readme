@@ -1,0 +1,41 @@
+Event Recommender System
+This is a very basic event recommender system that allows people to add and delete their names and interests, view events, filter through events based on date, price, event type and title.
+Motivation
+This project exists as a practice in object oriented programming. I hope to improve upon it by adding some kind of database when I learn how to do so that the site can become more functional.
+Build status
+Build status of incomplete, as I want to incorporate a database when that is introduced into our curriculum
+ 
+Code style
+Object-oriented programming.
+
+Screenshots
+https://gph.is/g/Z7DDJy2
+https://gph.is/g/aNWWVP9
+https://gph.is/g/4owwK7m
+Tech/framework used
+Built with JavaScript, Jquery, CSS and HTML.
+Features
+My project is interesting because it provides all types of events which many people can enjoy.
+Code Example
+class Events{
+  constructor(eventName,eventType,eventDate,eventPrice){
+    this.eventName = eventName;
+    this.eventType = eventType;
+    this.eventDate = eventDate;
+    this.eventPrice = eventPrice;
+  }
+}
+
+Installation
+No need to install anything.
+Tests
+Jasmine tests
+How to use?
+Click on buttons and add fields as necessary.
+Contribute
+Let people know how they can contribute into your project. A contributing guideline will be a big plus.
+Credits
+Credit to Wendy for helping the cohort with OOP!
+Anything else that seems useful
+License
+Yasmine Mahmoud
