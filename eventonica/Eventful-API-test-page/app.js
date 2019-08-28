@@ -78,8 +78,15 @@ const connection = require('./connection');
     name: "age"
     }
   ];
+    // inquirer.prompt(questions).then(result =>{
+    //   connection.query('SELECT * FROM users', (err, res) => {
+    //     if (err){
+    //       throw err
+    //     }
+    //     console.log('user: ', res.rows[0]);
+    //   })
     inquirer.prompt(questions).then(result =>{
-      connection.query('SELECT * FROM users', (err, res) => {
+      connection.query('INSERT INTO users (name, email, age) VALUES ($1, $2, $3)', [result.fullName, result.email, result.age], (err, res) => {
         if (err){
           throw err
         }
@@ -93,11 +100,32 @@ const connection = require('./connection');
 
  app.searchEventful = (continueCallback) => {
   //YOUR WORK HERE
-
-   console.log('Please write code for this function');
+  const questions = [
+    {
+      message: "What is the search keyword?",
+      type: "input",
+      name: "keyword",
+      default: "tango"
+    },
+    {
+      message: "What is the location?",
+      type: "input",
+      name: "location",
+      default: "San Francisco"
+    },
+    {
+      message: "What is the date?",
+      type: "input",
+      name: "date",
+      default: "Next Week"
+    }
+  ]
+  inquirer.prompt(questions).then(result =>{
+   console.log([continueCallback]);
   //End of your work
   continueCallback();
-}
+  })
+};
 
  app.matchUserWithEvent = (continueCallback) => {
   //YOUR WORK HERE
