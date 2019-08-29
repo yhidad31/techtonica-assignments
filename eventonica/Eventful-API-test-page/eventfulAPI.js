@@ -4,9 +4,9 @@ const client = new eventful.Client(eventfulKey);
 
  //sample search, try running it to see it in action
 client.searchEvents({
-  keywords: 'tango',
+  keywords: 'afrobeats',
   location: 'San Francisco',
-  date: "Next Week"
+  date: "Future"
 }, function(err, data){
    if(err){
      return console.error(err);

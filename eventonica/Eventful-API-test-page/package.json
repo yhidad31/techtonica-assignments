@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "eventful-node": "^1.1.1",
     "express": "^4.17.1",
     "inquirer": "^7.0.0",
     "pg": "^7.12.1",
-    "pg-hstore": "^2.3.3"
+    "pg-hstore": "^2.3.3",
+    "rxjs": "^6.5.2"
   }
 }
