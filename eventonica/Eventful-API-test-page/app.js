@@ -2,12 +2,13 @@ const inquirer = require('inquirer');
 //connection available to all
 const connection = require('./connection');
 const eventful = require('eventful-node');
-const client = new eventful.Client('xMkTQCc6xkkSXJvL');
+const client = new eventful.Client(eventful);
 //above connecting to external API
 
 const app = {};
 
  app.startQuestion = (closeConnectionCallback) => {
+   //takes in thing that goes at the end
   inquirer.prompt({
   //async bc chained to a .then statement
     type: 'list',
@@ -39,6 +40,7 @@ const app = {};
 }
 
  app.completeSentence = (continueCallback) => {
+
   //YOUR WORK HERE
   const questions = [
     {
@@ -122,13 +124,15 @@ const app = {};
         if (err) {
           return console.error(err);
         }
-        eventResult = data.search.events.event[0];
+        let eventResult = data.search.events.event[0];
         console.log(
           "This event next week that matches your keyword:"
         );
-        console.log("name: ", eventResult.name);
-        console.log("location: ", eventResult.location);
-        console.log("date: ", eventResult.date);
+        // 
+        console.log("event: ", eventResult.title);
+        console.log("location: ", eventResult.venue_name);
+        console.log("date: ", eventResult.start_time);
+
        inquirer.prompt([
         {
         type: "list",
@@ -141,28 +145,147 @@ const app = {};
         if (answer.yesorno === "no"){
           app.searchEventful(continueCallback);
         } else {
-          connection.query('INSERT INTO events (name,location, date) VALUES($1, $2, $3)', [eventResult.name, eventResult.location, eventResult.date], (err, res) => {
+          connection.query('INSERT INTO events (name,location, date) VALUES($1, $2, $3)', [eventResult.title, eventResult.venue_name, eventResult.start_time], (err, res) => {
             if(err) {
               throw err
             }
-          console.log('event: ', res)
+          console.log('Congrats! You have saved an event to your account');
+          continueCallback();
         }) 
       }
     })
     }
   );
-})
-  //  console.log('Please write code for this function');
-  //End of your work
-  continueCallback();
+}) 
 }
 
- app.seeUsersOfOneEvent = (continueCallback) => {
-  //YOUR WORK HERE
+app.matchUserWithEvent = continueCallback => {
+  // YOUR WORK HERE
+  connection.query('SELECT * from users', (err, results) => {
+    if (err) {
+      throw err;
+    }
+    const resultArray = [];
+    for (const x of results.rows) {
+      resultArray.push(`ID: ${x.id} NAME: ${x.name}`);
+    }
+    inquirer
+      .prompt({
+        type: 'list',
+        name: 'userString',
+        message: 'Please enter a user from the list below.\n',
+        choices: resultArray
+      })
+      .then(userSelected => {
+        let userNum = userSelected.userString.match(/\d+/g);
+        connection.query('SELECT * from events ', (error, events) => {
+          if (error) {
+            throw error;
+          }
+          const eventArray = [];
+          for (const x of events.rows) {
+            eventArray.push(`ID: ${x.id} NAME: ${x.name}`);
+          }
+          inquirer
+            .prompt({
+              type: 'list',
+              name: 'eventString',
+              message: 'Please enter an event that you want the user to attend.\n',
+              choices: eventArray
+            })
+            .then(eventSelected => {
+              let eventNum = eventSelected.eventString.match(/\d+/g);
+              userNum = parseInt(userNum);
+              eventNum = parseInt(eventNum);
+              connection.query(
+                'INSERT INTO users_events (userid, eventid) VALUES ($1,$2)',
+                [userNum, eventNum],
+                error => {
+                  if (error) {
+                    throw error;
+                  }
+                  console.log('You added a user to an event!');
+                   continueCallback();
+                }
+              );
+            });
+        });
+      });
+    //continue callback was commented out here
+  });
+ };
+ app.seeEventsOfOneUser = continueCallback => {
+  // YOUR WORK HERE
+  connection.query('SELECT * from users', (err, results) => {
+    if (err) {
+      throw err;
+    }
+    const resultArray = [];
+    for (const x of results.rows) {
 
-   console.log('Please write code for this function');
-  //End of your work
-  continueCallback();
-}
+      resultArray.push(`ID: ${x.id} NAME: ${x.name}`);
+    }
+    inquirer
+      .prompt({
+        type: 'list',
+        name: 'userString',
+        message: 'Please enter a user from the list below.\n',
+        choices: resultArray
+      })
+      .then(userSelected => {
+        let userNum = userSelected.userString.match(/\d+/g);
+        userNum = parseInt(userNum);
+        connection.query(
+          'SELECT users.name, events.name FROM users_events JOIN users ON users_events.userid = users.id JOIN events ON users_events.eventid = events.id WHERE users.id = $1;',
+          [userNum],
+          (error, res) => {
+            if (error) {
+              throw error;
+            }
+            console.table(res.rows);
+          }
+        );
+      });
+  });
+  // End of your work
+  // continueCallback();
+ };
 
- module.exports = app;
+ app.seeUsersOfOneEvent = continueCallback => {
+  // YOUR WORK HERE
+  connection.query('SELECT * from events ', (error, events) => {
+    if (error) {
+      throw error;
+    }
+    const eventArray = [];
+    for (const x of events.rows) {
+      eventArray.push(`ID: ${x.id} NAME: ${x.name}`);
+    }
+    inquirer
+      .prompt({
+        type: 'list',
+        name: 'eventString',
+        message: 'Please enter an event that you want the user to attend.\n',
+        choices: eventArray
+      })
+      .then(eventSelected => {
+        let eventNum = eventSelected.eventString.match(/\d+/g);
+        eventNum = parseInt(eventNum);
+        connection.query(
+          'SELECT events.title, users.username FROM usertoevent JOIN users ON usertoevent.user_id = users.id JOIN events ON usertoevent.event_id = events.id WHERE events.id = $1;',
+          [eventNum],
+          (error, res) => {
+            if (error) {
+              throw error;
+            }
+            console.table(res.rows);
+          }
+        );
+      });
+  });
+  // End of your work
+  // continueCallback();
+ };
+
+  
+module.exports = app;  

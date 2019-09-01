@@ -9,6 +9,7 @@ const app = require('./app');
     console.log("connected as Administrator");
 
      app.startQuestion(()=>{ connection.end() });
+     //this says when finished w everything close connection
   })
 // }
 
