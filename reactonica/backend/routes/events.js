@@ -3,14 +3,14 @@ let Events = require('../models/events.model');
 
 router.route('/').get((req,res) => {
   Events.find()
-  .then(users => res.json(users))
+  .then(events => res.json(events))
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('./add').post((req,res) =>{
+router.route('/add').post((req,res) =>{
   const eventName = req.body.eventName;
-  const eventID = Number.parse(req.body.eventID);
-  const eventTime = Date.parse(req.body.eventTime);
+  const eventID = Number(req.body.eventID);
+  const eventTime = Date(req.body.eventTime);
 
   const newEvents = new Events ({
     eventName,
