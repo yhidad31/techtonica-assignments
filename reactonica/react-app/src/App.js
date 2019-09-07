@@ -12,17 +12,19 @@ import EditUsers from "./components/edit-user.component";
 import CreateUsers from "./components/create-user.component";
 
 //Savedevents
-import SavedeventsList from "./components/savedevents-list.component"
+
 
 function App() {
   return (
     <Router>
+      <div className="container">
       <Navbar />
       <br/>
       <Route path="/" exact component={EventsList} />
       <Route path="/edit/:id" exact component={EditEvents} />
       <Route path="/create" exact component={EditUsers} />
       <Route path="/user" exact component={CreateUsers} />
+      </div>
     </Router>
   );
 }
