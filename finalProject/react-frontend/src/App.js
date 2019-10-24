@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      list: true,
+      card: false,
+      players: [],
+      player: {}
+    };
 }
-
-export default App;
+componentDidMount() {
+  fetch("http://localhost:3001/players/list")
+  .then(response => response.json())
+  .then( responseJson=> {
+    this.setState({ players:responseJson.data });
+  },
+)}
+showCard=id=> {
+  fetch(`http://localhost:3001/players/${id}`)
+  .then(response => response.json())
+  .then(
+  responseJson=> {this.setState({ player:responseJson.data })},
+);
+this.setState({
+  list:false,
+  card:true
+});
+};
+showList = () => {
+   this.setState({
+     card: false,
+     list: true
+   });
+};
+}
