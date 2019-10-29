@@ -11,7 +11,25 @@ export default class App extends Component {
       player: {}
     };
   }
+
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
+
   componentDidMount() {
+    const { renewSession } = this.props.auth;
+
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      renewSession();
+    };
     fetch("http://localhost:3001/players/list")
       .then(response => response.json())
       .then(responseJson => {
@@ -36,6 +54,53 @@ export default class App extends Component {
       list: true
     });
   };
+
+  render() {
+    const { isAuthenticated } = this.props.auth;
+
+    return (
+      <div>
+        <Navbar fluid>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a href="#">Auth0 - React</a>
+            </Navbar.Brand>
+            <Button
+              bsStyle="primary"
+              className="btn-margin"
+              onClick={this.goTo.bind(this, 'home')}
+            >
+              Home
+            </Button>
+            {
+              !isAuthenticated() && (
+                  <Button
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.login.bind(this)}
+                  >
+                    Log In
+                  </Button>
+                )
+            }
+            {
+              isAuthenticated() && (
+                  <Button
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.logout.bind(this)}
+                  >
+                    Log Out
+                  </Button>
+                )
+            }
+          </Navbar.Header>
+        </Navbar>
+      </div>
+    );
+  }
+};
+
 
   render() {
     return (
