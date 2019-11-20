@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <div>
       <Navbar color="primary" dark expand="md" className="mb-5">
-        <NavbarBrand href="/">Yasmine App</NavbarBrand>
+        <NavbarBrand href="/">HealthTrac</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
